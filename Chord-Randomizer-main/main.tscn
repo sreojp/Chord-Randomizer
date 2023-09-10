@@ -1,0 +1,338 @@
+[gd_scene load_steps=16 format=3 uid="uid://b1nfjmjdytteb"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_ywady"]
+[ext_resource type="Script" path="res://metronome/MeterButton.gd" id="2_2w203"]
+[ext_resource type="Script" path="res://Mutation.gd" id="2_eufnl"]
+[ext_resource type="PackedScene" uid="uid://cxy62oqlm3m7e" path="res://metronome/light.tscn" id="2_tsidk"]
+[ext_resource type="Script" path="res://ChordVariation.gd" id="3_vletj"]
+[ext_resource type="Script" path="res://metronome/minusone.gd" id="4_ej7ct"]
+[ext_resource type="PackedScene" uid="uid://bdbg3gw85gh3y" path="res://chordscreen/fretboard.tscn" id="4_kn1x7"]
+[ext_resource type="Script" path="res://metronome/TempoSlider.gd" id="4_s84fh"]
+[ext_resource type="Script" path="res://metronome/minusfive.gd" id="5_541n7"]
+[ext_resource type="Script" path="res://metronome/DenomButton.gd" id="7_pia1r"]
+[ext_resource type="Script" path="res://metronome/plusone.gd" id="10_u1tg3"]
+[ext_resource type="Script" path="res://metronome/plusfive.gd" id="11_h00su"]
+[ext_resource type="Script" path="res://Timer.gd" id="11_haoyd"]
+[ext_resource type="PackedScene" uid="uid://d05gv2f3vm3mc" path="res://metronome/start_button.tscn" id="11_idme5"]
+[ext_resource type="AudioStream" uid="uid://boplj5tmocj83" path="res://metronome/ClickTwo.mp3" id="15_trxdc"]
+
+[node name="main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ywady")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ChordInfo" type="Panel" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/ChordInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/ChordInfo/VBoxContainer"]
+layout_mode = 2
+text = "Mutation"
+
+[node name="Mutation" type="HSlider" parent="MarginContainer/HBoxContainer/ChordInfo/VBoxContainer"]
+layout_mode = 2
+max_value = 7.0
+tick_count = 8
+ticks_on_borders = true
+script = ExtResource("2_eufnl")
+
+[node name="MutationDescription" type="Label" parent="MarginContainer/HBoxContainer/ChordInfo/VBoxContainer"]
+layout_mode = 2
+text = "Repeats one randomly chosen chord"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/ChordInfo/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer/ChordInfo/VBoxContainer"]
+layout_mode = 2
+text = "Possible Distance from Neck"
+
+[node name="ChordVariation" type="HSlider" parent="MarginContainer/HBoxContainer/ChordInfo/VBoxContainer"]
+layout_mode = 2
+max_value = 3.0
+tick_count = 4
+ticks_on_borders = true
+script = ExtResource("3_vletj")
+
+[node name="VariationDescription" type="Label" parent="MarginContainer/HBoxContainer/ChordInfo/VBoxContainer"]
+layout_mode = 2
+text = "Plays the lowest possible chord variation"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/HBoxContainer/ChordInfo/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/ChordInfo/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/ChordInfo/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Next Chord:"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer/ChordInfo/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ChordName" type="Label" parent="MarginContainer/HBoxContainer/ChordInfo/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Diagram" type="TextureRect" parent="MarginContainer/HBoxContainer/ChordInfo/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Fingering" type="Panel" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Fingering"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChordName" type="Label" parent="MarginContainer/HBoxContainer/Fingering/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Fretboard" parent="MarginContainer/HBoxContainer/Fingering/VBoxContainer" instance=ExtResource("4_kn1x7")]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.75
+
+[node name="Metronome" type="Panel" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/Metronome"]
+layout_mode = 2
+offset_right = 382.0
+offset_bottom = 648.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer"]
+layout_mode = 2
+
+[node name="Lights" type="Panel" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LightContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/Lights"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Light" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/Lights/LightContainer" groups=["lights"] instance=ExtResource("2_tsidk")]
+layout_mode = 2
+
+[node name="Light2" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/Lights/LightContainer" groups=["lights"] instance=ExtResource("2_tsidk")]
+layout_mode = 2
+
+[node name="Light3" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/Lights/LightContainer" groups=["lights"] instance=ExtResource("2_tsidk")]
+layout_mode = 2
+
+[node name="Light4" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/Lights/LightContainer" groups=["lights"] instance=ExtResource("2_tsidk")]
+layout_mode = 2
+
+[node name="TimeSignature" type="Panel" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Time Signature:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MeterButton" type="OptionButton" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+item_count = 20
+selected = 3
+popup/item_0/text = "1"
+popup/item_0/id = 1
+popup/item_1/text = "2"
+popup/item_1/id = 2
+popup/item_2/text = "3"
+popup/item_2/id = 3
+popup/item_3/text = "4"
+popup/item_3/id = 4
+popup/item_4/text = "5"
+popup/item_4/id = 5
+popup/item_5/text = "6"
+popup/item_5/id = 6
+popup/item_6/text = "7"
+popup/item_6/id = 7
+popup/item_7/text = "8"
+popup/item_7/id = 8
+popup/item_8/text = "9"
+popup/item_8/id = 9
+popup/item_9/text = "10"
+popup/item_9/id = 10
+popup/item_10/text = "11"
+popup/item_10/id = 11
+popup/item_11/text = "12"
+popup/item_11/id = 12
+popup/item_12/text = "13"
+popup/item_12/id = 13
+popup/item_13/text = "14"
+popup/item_13/id = 14
+popup/item_14/text = "15"
+popup/item_14/id = 15
+popup/item_15/text = "16"
+popup/item_15/id = 16
+popup/item_16/text = "17"
+popup/item_16/id = 17
+popup/item_17/text = "18"
+popup/item_17/id = 18
+popup/item_18/text = "19"
+popup/item_18/id = 19
+popup/item_19/text = "20"
+popup/item_19/id = 20
+script = ExtResource("2_2w203")
+
+[node name="Slash" type="TextEdit" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "    /"
+
+[node name="DenomButton" type="OptionButton" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature/VBoxContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+item_count = 8
+selected = 2
+popup/item_0/text = "1"
+popup/item_0/id = 1
+popup/item_1/text = "2"
+popup/item_1/id = 2
+popup/item_2/text = "4"
+popup/item_2/id = 4
+popup/item_3/text = "8"
+popup/item_3/id = 8
+popup/item_4/text = "16"
+popup/item_4/id = 16
+popup/item_5/text = "32"
+popup/item_5/id = 32
+popup/item_6/text = "64"
+popup/item_6/id = 64
+popup/item_7/text = "128"
+popup/item_7/id = 128
+script = ExtResource("7_pia1r")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="minusone" type="Button" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature/VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "-1"
+script = ExtResource("4_ej7ct")
+
+[node name="minusfive" type="Button" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature/VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "-5"
+script = ExtResource("5_541n7")
+
+[node name="TempoButton" type="Button" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "60"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="plusone" type="Button" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature/VBoxContainer/HBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "+1"
+script = ExtResource("10_u1tg3")
+
+[node name="plusfive" type="Button" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature/VBoxContainer/HBoxContainer2/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "+5"
+script = ExtResource("11_h00su")
+
+[node name="TempoSlider" type="HSlider" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/TimeSignature/VBoxContainer"]
+layout_mode = 2
+min_value = 20.0
+max_value = 250.0
+value = 60.0
+script = ExtResource("4_s84fh")
+
+[node name="StartPanel" type="Panel" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StartButton" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer/StartPanel" instance=ExtResource("11_idme5")]
+layout_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/Metronome/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Timer" type="Timer" parent="."]
+script = ExtResource("11_haoyd")
+
+[node name="ClickOne" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_trxdc")
+pitch_scale = 1.3
+
+[node name="ClickTwo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_trxdc")
