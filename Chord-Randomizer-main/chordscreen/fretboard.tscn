@@ -1,0 +1,1144 @@
+[gd_scene load_steps=11 format=3 uid="uid://bdbg3gw85gh3y"]
+
+[ext_resource type="Script" path="res://chordscreen/fretboard.gd" id="1_pb0ws"]
+[ext_resource type="Script" path="res://chordscreen/Neck.gd" id="2_eqtav"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tvu68"]
+font_size = 14
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f76h4"]
+font_size = 14
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bimf3"]
+font_size = 14
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ft84v"]
+font_size = 14
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_mtomw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2vrrr"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ycyeq"]
+resource_name = "fade_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w86h2"]
+_data = {
+"RESET": SubResource("Animation_mtomw"),
+"fade_in": SubResource("Animation_2vrrr"),
+"fade_out": SubResource("Animation_ycyeq")
+}
+
+[node name="Fretboard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pb0ws")
+
+[node name="StringContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TopSpace" type="ColorRect" parent="StringContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StringContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="ColorRect" type="ColorRect" parent="StringContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="LowEString" type="VBoxContainer" parent="StringContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="zero" type="ColorRect" parent="StringContainer/HBoxContainer/LowEString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="zero" type="Control" parent="StringContainer/HBoxContainer/LowEString/zero" groups=["LowEString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_right = 1.5
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="one" type="ColorRect" parent="StringContainer/HBoxContainer/LowEString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="one" type="Control" parent="StringContainer/HBoxContainer/LowEString/one" groups=["LowEString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_top = 0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="two" type="ColorRect" parent="StringContainer/HBoxContainer/LowEString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="two" type="Control" parent="StringContainer/HBoxContainer/LowEString/two" groups=["LowEString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="three" type="ColorRect" parent="StringContainer/HBoxContainer/LowEString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="three" type="Control" parent="StringContainer/HBoxContainer/LowEString/three" groups=["LowEString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_top = 0.5
+offset_right = 1.5
+offset_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="four" type="ColorRect" parent="StringContainer/HBoxContainer/LowEString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="four" type="Control" parent="StringContainer/HBoxContainer/LowEString/four" groups=["LowEString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_top = 0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="five" type="ColorRect" parent="StringContainer/HBoxContainer/LowEString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="five" type="Control" parent="StringContainer/HBoxContainer/LowEString/five" groups=["LowEString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_top = 0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect9" type="ColorRect" parent="StringContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AString" type="VBoxContainer" parent="StringContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="zero" type="ColorRect" parent="StringContainer/HBoxContainer/AString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="zero" type="Control" parent="StringContainer/HBoxContainer/AString/zero" groups=["AString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="one" type="ColorRect" parent="StringContainer/HBoxContainer/AString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="one" type="Control" parent="StringContainer/HBoxContainer/AString/one" groups=["AString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="two" type="ColorRect" parent="StringContainer/HBoxContainer/AString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="two" type="Control" parent="StringContainer/HBoxContainer/AString/two" groups=["AString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="three" type="ColorRect" parent="StringContainer/HBoxContainer/AString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="three" type="Control" parent="StringContainer/HBoxContainer/AString/three" groups=["AString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="four" type="ColorRect" parent="StringContainer/HBoxContainer/AString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="four" type="Control" parent="StringContainer/HBoxContainer/AString/four" groups=["AString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="five" type="ColorRect" parent="StringContainer/HBoxContainer/AString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="five" type="Control" parent="StringContainer/HBoxContainer/AString/five" groups=["AString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect11" type="ColorRect" parent="StringContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DString" type="VBoxContainer" parent="StringContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="zero" type="ColorRect" parent="StringContainer/HBoxContainer/DString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="zero" type="Control" parent="StringContainer/HBoxContainer/DString/zero" groups=["DString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="one" type="ColorRect" parent="StringContainer/HBoxContainer/DString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="one" type="Control" parent="StringContainer/HBoxContainer/DString/one" groups=["DString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="two" type="ColorRect" parent="StringContainer/HBoxContainer/DString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="two" type="Control" parent="StringContainer/HBoxContainer/DString/two" groups=["DString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="three" type="ColorRect" parent="StringContainer/HBoxContainer/DString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="three" type="Control" parent="StringContainer/HBoxContainer/DString/three" groups=["DString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="four" type="ColorRect" parent="StringContainer/HBoxContainer/DString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="four" type="Control" parent="StringContainer/HBoxContainer/DString/four" groups=["DString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="five" type="ColorRect" parent="StringContainer/HBoxContainer/DString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="five" type="Control" parent="StringContainer/HBoxContainer/DString/five" groups=["DString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect3" type="ColorRect" parent="StringContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GString" type="VBoxContainer" parent="StringContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="zero" type="ColorRect" parent="StringContainer/HBoxContainer/GString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="zero" type="Control" parent="StringContainer/HBoxContainer/GString/zero" groups=["GString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="one" type="ColorRect" parent="StringContainer/HBoxContainer/GString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="one" type="Control" parent="StringContainer/HBoxContainer/GString/one" groups=["GString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="two" type="ColorRect" parent="StringContainer/HBoxContainer/GString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="two" type="Control" parent="StringContainer/HBoxContainer/GString/two" groups=["GString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="three" type="ColorRect" parent="StringContainer/HBoxContainer/GString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="three" type="Control" parent="StringContainer/HBoxContainer/GString/three" groups=["GString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="four" type="ColorRect" parent="StringContainer/HBoxContainer/GString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="four" type="Control" parent="StringContainer/HBoxContainer/GString/four" groups=["GString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="five" type="ColorRect" parent="StringContainer/HBoxContainer/GString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="five" type="Control" parent="StringContainer/HBoxContainer/GString/five" groups=["GString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect5" type="ColorRect" parent="StringContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BString" type="VBoxContainer" parent="StringContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="zero" type="ColorRect" parent="StringContainer/HBoxContainer/BString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="zero" type="Control" parent="StringContainer/HBoxContainer/BString/zero" groups=["BString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="one" type="ColorRect" parent="StringContainer/HBoxContainer/BString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="one" type="Control" parent="StringContainer/HBoxContainer/BString/one" groups=["BString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="two" type="ColorRect" parent="StringContainer/HBoxContainer/BString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="two" type="Control" parent="StringContainer/HBoxContainer/BString/two" groups=["BString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="three" type="ColorRect" parent="StringContainer/HBoxContainer/BString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="three" type="Control" parent="StringContainer/HBoxContainer/BString/three" groups=["BString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="four" type="ColorRect" parent="StringContainer/HBoxContainer/BString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="four" type="Control" parent="StringContainer/HBoxContainer/BString/four" groups=["BString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="five" type="ColorRect" parent="StringContainer/HBoxContainer/BString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="five" type="Control" parent="StringContainer/HBoxContainer/BString/five" groups=["BString"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect13" type="ColorRect" parent="StringContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HighEString" type="VBoxContainer" parent="StringContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="zero" type="ColorRect" parent="StringContainer/HBoxContainer/HighEString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="zero" type="Control" parent="StringContainer/HBoxContainer/HighEString/zero"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="one" type="ColorRect" parent="StringContainer/HBoxContainer/HighEString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="one" type="Control" parent="StringContainer/HBoxContainer/HighEString/one"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_top = 0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="two" type="ColorRect" parent="StringContainer/HBoxContainer/HighEString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="two" type="Control" parent="StringContainer/HBoxContainer/HighEString/two"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="three" type="ColorRect" parent="StringContainer/HBoxContainer/HighEString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="three" type="Control" parent="StringContainer/HBoxContainer/HighEString/three"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_top = 0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="four" type="ColorRect" parent="StringContainer/HBoxContainer/HighEString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="four" type="Control" parent="StringContainer/HBoxContainer/HighEString/four"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_top = 0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="five" type="ColorRect" parent="StringContainer/HBoxContainer/HighEString"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+color = Color(0, 0, 0, 1)
+
+[node name="five" type="Control" parent="StringContainer/HBoxContainer/HighEString/five"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_top = 0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect7" type="ColorRect" parent="StringContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="BarContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TopSpace" type="ColorRect" parent="BarContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BarContainer/TopSpace"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="BarContainer/TopSpace/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.55
+
+[node name="E" type="ColorRect" parent="BarContainer/TopSpace/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="E" type="Control" parent="BarContainer/TopSpace/HBoxContainer/E"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect3" type="ColorRect" parent="BarContainer/TopSpace/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="A" type="ColorRect" parent="BarContainer/TopSpace/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="A" type="Control" parent="BarContainer/TopSpace/HBoxContainer/A"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect5" type="ColorRect" parent="BarContainer/TopSpace/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="D" type="ColorRect" parent="BarContainer/TopSpace/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="D" type="Control" parent="BarContainer/TopSpace/HBoxContainer/D"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect7" type="ColorRect" parent="BarContainer/TopSpace/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="G" type="ColorRect" parent="BarContainer/TopSpace/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="G" type="Control" parent="BarContainer/TopSpace/HBoxContainer/G"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect9" type="ColorRect" parent="BarContainer/TopSpace/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="B" type="ColorRect" parent="BarContainer/TopSpace/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="B" type="Control" parent="BarContainer/TopSpace/HBoxContainer/B"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect11" type="ColorRect" parent="BarContainer/TopSpace/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HighE" type="ColorRect" parent="BarContainer/TopSpace/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="HighE" type="Control" parent="BarContainer/TopSpace/HBoxContainer/HighE"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect13" type="ColorRect" parent="BarContainer/TopSpace/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.55
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="BarContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="FretLabels" type="VBoxContainer" parent="BarContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+theme_override_constants/separation = 0
+
+[node name="FretLabel1" type="Label" parent="BarContainer/HBoxContainer2/FretLabels"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+label_settings = SubResource("LabelSettings_tvu68")
+
+[node name="FretLabel2" type="Label" parent="BarContainer/HBoxContainer2/FretLabels"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+text = "1
+"
+label_settings = SubResource("LabelSettings_f76h4")
+
+[node name="FretLabel3" type="Label" parent="BarContainer/HBoxContainer2/FretLabels"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+text = "2"
+label_settings = SubResource("LabelSettings_bimf3")
+
+[node name="FretLabel4" type="Label" parent="BarContainer/HBoxContainer2/FretLabels"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+text = "3"
+label_settings = SubResource("LabelSettings_ft84v")
+
+[node name="FretLabel5" type="Label" parent="BarContainer/HBoxContainer2/FretLabels"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+text = "4"
+label_settings = SubResource("LabelSettings_ft84v")
+
+[node name="FretLabel6" type="Label" parent="BarContainer/HBoxContainer2/FretLabels"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 6
+text = "5"
+label_settings = SubResource("LabelSettings_ft84v")
+
+[node name="ColorRect2" type="ColorRect" parent="BarContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.08
+
+[node name="Bars" type="VBoxContainer" parent="BarContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="ColorRect13" type="ColorRect" parent="BarContainer/HBoxContainer2/Bars"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+color = Color(0, 0, 0, 1)
+
+[node name="Neck" type="ColorRect" parent="BarContainer/HBoxContainer2/Bars"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0, 0, 0, 1)
+script = ExtResource("2_eqtav")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BarContainer/HBoxContainer2/Bars/Neck"]
+libraries = {
+"": SubResource("AnimationLibrary_w86h2")
+}
+
+[node name="ColorRect12" type="ColorRect" parent="BarContainer/HBoxContainer2/Bars"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect8" type="ColorRect" parent="BarContainer/HBoxContainer2/Bars"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0)
+
+[node name="ColorRect9" type="ColorRect" parent="BarContainer/HBoxContainer2/Bars"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect6" type="ColorRect" parent="BarContainer/HBoxContainer2/Bars"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0)
+
+[node name="ColorRect7" type="ColorRect" parent="BarContainer/HBoxContainer2/Bars"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="BarContainer/HBoxContainer2/Bars"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0)
+
+[node name="ColorRect3" type="ColorRect" parent="BarContainer/HBoxContainer2/Bars"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="BarContainer/HBoxContainer2/Bars"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0)
+
+[node name="ColorRect5" type="ColorRect" parent="BarContainer/HBoxContainer2/Bars"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+color = Color(0, 0, 0, 1)
+
+[node name="Bottom1" type="ColorRect" parent="BarContainer/HBoxContainer2/Bars"]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0)
+
+[node name="Bottom2" type="ColorRect" parent="BarContainer/HBoxContainer2/Bars"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect" type="ColorRect" parent="BarContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.23
