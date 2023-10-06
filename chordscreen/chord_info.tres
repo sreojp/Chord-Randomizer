@@ -1,6 +1,0 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dllpplrewy3ao"]
-
-[ext_resource type="Script" path="res://chordscreen/chord_info.gd" id="1_ap5lt"]
-
-[resource]
-script = ExtResource("1_ap5lt")
